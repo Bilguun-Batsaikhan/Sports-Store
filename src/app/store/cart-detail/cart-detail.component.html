@@ -1,0 +1,92 @@
+<div class="cart-detail">
+  <div *ngIf="lines.length === 0" class="alert alert-info text-center">
+    <i class="fas fa-info-circle me-2"></i>
+    Your cart is empty
+  </div>
+
+  <div *ngIf="lines.length > 0">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr class="text-center">
+            <th class="text-start">Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of lines">
+            <td>
+              <strong>{{ line.product.name }}</strong>
+              <br />
+              <small class="text-muted">{{ line.product.description }}</small>
+            </td>
+            <td class="text-success">
+              {{ line.product.price | currency : "EUR" : "symbol" : "1.2-2" }}
+            </td>
+            <td>
+              <div class="input-group" style="width: 120px">
+                <button
+                  class="btn btn-outline-secondary btn-sm"
+                  (click)="updateQuantity(line.product, line.quantity - 1)"
+                  [disabled]="line.quantity <= 1"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input
+                  #qtyInput
+                  type="number"
+                  class="form-control text-center"
+                  [value]="line.quantity"
+                  (change)="updateQuantity(line.product, +qtyInput.value)"
+                  min="1"
+                />
+                <button
+                  class="btn btn-outline-secondary btn-sm"
+                  (click)="updateQuantity(line.product, line.quantity + 1)"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </td>
+            <td class="text-success">
+              <strong>{{
+                line.product.price * line.quantity
+                  | currency : "EUR" : "symbol" : "1.2-2"
+              }}</strong>
+            </td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="removeLine(line.product.id!)"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <button class="btn btn-outline-danger" (click)="clearCart()">
+          <i class="fas fa-trash me-2"></i>Clear Cart
+        </button>
+      </div>
+      <div class="col-md-6 text-end">
+        <h4>
+          Total:
+          <span class="text-success">{{
+            cartPrice | currency : "EUR" : "symbol" : "1.2-2"
+          }}</span>
+        </h4>
+        <button class="btn btn-success" (click)="proceedToCheckout()">
+          <i class="fas fa-credit-card me-2"></i>Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

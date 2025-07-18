@@ -1,0 +1,244 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">
+            <i class="fas fa-shipping-fast me-2"></i>Checkout
+          </h3>
+        </div>
+        <div class="card-body">
+          <!-- Error Message -->
+          <div class="alert alert-danger" *ngIf="errorMessage" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            {{ errorMessage }}
+          </div>
+
+          <!-- Success Message -->
+          <div class="alert alert-success" *ngIf="orderSent" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            Thank you! Your order has been successfully placed.
+          </div>
+
+          <!-- Success Actions -->
+          <div class="text-center" *ngIf="orderSent">
+            <button class="btn btn-primary me-3" routerLink="/">
+              <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+            </button>
+            <button class="btn btn-outline-primary" (click)="resetForm()">
+              <i class="fas fa-plus me-2"></i>Place New Order
+            </button>
+          </div>
+
+          <form
+            (ngSubmit)="onSubmit()"
+            #checkoutForm="ngForm"
+            *ngIf="!orderSent"
+          >
+            <!-- Personal Information Section -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <h5 class="border-bottom pb-2 mb-3">
+                  <i class="fas fa-user me-2"></i>Personal Information
+                </h5>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <label for="name" class="form-label">Full Name *</label>
+                <input
+                  [(ngModel)]="order.name"
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="name"
+                  ngModel
+                  required
+                  #name="ngModel"
+                  placeholder="Enter your full name"
+                />
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="name.invalid && (name.dirty || name.touched)"
+                >
+                  <small *ngIf="name.errors?.['required']"
+                    >Name is required</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Shipping Address Section -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <h5 class="border-bottom pb-2 mb-3">
+                  <i class="fas fa-map-marker-alt me-2"></i>Shipping Address
+                </h5>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <label for="address" class="form-label">Street Address *</label>
+                <input
+                  [(ngModel)]="order.address"
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  name="address"
+                  ngModel
+                  required
+                  #address="ngModel"
+                  placeholder="Enter your street address"
+                />
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="address.invalid && (address.dirty || address.touched)"
+                >
+                  <small *ngIf="address.errors?.['required']"
+                    >Address is required</small
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="city" class="form-label">City *</label>
+                <input
+                  [(ngModel)]="order.city"
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  name="city"
+                  ngModel
+                  required
+                  #city="ngModel"
+                  placeholder="Enter city"
+                />
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="city.invalid && (city.dirty || city.touched)"
+                >
+                  <small *ngIf="city.errors?.['required']"
+                    >City is required</small
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="state" class="form-label">State/Province *</label>
+                <input
+                  [(ngModel)]="order.state"
+                  type="text"
+                  class="form-control"
+                  id="state"
+                  name="state"
+                  ngModel
+                  required
+                  #state="ngModel"
+                  placeholder="Enter state/province"
+                />
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="state.invalid && (state.dirty || state.touched)"
+                >
+                  <small *ngIf="state.errors?.['required']"
+                    >State is required</small
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="zip" class="form-label">ZIP/Postal Code *</label>
+                <input
+                  [(ngModel)]="order.zip"
+                  type="text"
+                  class="form-control"
+                  id="zip"
+                  name="zip"
+                  ngModel
+                  required
+                  #zip="ngModel"
+                  placeholder="Enter ZIP/postal code"
+                />
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="zip.invalid && (zip.dirty || zip.touched)"
+                >
+                  <small *ngIf="zip.errors?.['required']"
+                    >ZIP code is required</small
+                  >
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="country" class="form-label">Country *</label>
+                <select
+                  class="form-select"
+                  id="country"
+                  name="country"
+                  [(ngModel)]="order.country"
+                  required
+                  #country="ngModel"
+                >
+                  <option value="">Select a country</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="IT">Italy</option>
+                  <option value="ES">Spain</option>
+                  <option value="AU">Australia</option>
+                  <option value="JP">Japan</option>
+                  <option value="CN">China</option>
+                  <option value="IN">India</option>
+                  <option value="BR">Brazil</option>
+                  <option value="MX">Mexico</option>
+                  <option value="other">Other</option>
+                </select>
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="country.invalid && (country.dirty || country.touched)"
+                >
+                  <small *ngIf="country.errors?.['required']"
+                    >Country is required</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Summary Section -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <h5 class="border-bottom pb-2 mb-3">
+                  <i class="fas fa-receipt me-2"></i>Order Summary
+                </h5>
+                <app-cart-summary></app-cart-summary>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="row">
+              <div class="col-12 d-flex justify-content-between">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  routerLink="/"
+                >
+                  <i class="fas fa-arrow-left me-2"></i>Back to Store
+                </button>
+
+                <button
+                  type="submit"
+                  class="btn btn-success btn-lg"
+                  [disabled]="!checkoutForm.valid || submitted"
+                >
+                  <i class="fas fa-credit-card me-2"></i>
+                  <span *ngIf="!submitted">Place Order</span>
+                  <span *ngIf="submitted">Processing...</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+.cart-icon {
+  transition: transform 0.2s ease;
+}
+
+.cart-icon:hover {
+  transform: scale(1.05);
+}
+
+.cart-icon:hover i {
+  color: #0056b3 !important;
+}
+
+.badge {
+  font-size: 0.7rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-total {
+  line-height: 1.2;
+  text-align: right;
+}
+
+.cart-total .small {
+  font-size: 0.8rem;
+}
+
+.cart-total .fw-bold {
+  font-size: 1.1rem;
+}
+mmary {
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

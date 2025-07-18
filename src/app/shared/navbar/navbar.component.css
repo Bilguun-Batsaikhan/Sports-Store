@@ -1,0 +1,97 @@
+/* Navbar custom styles */
+.navbar {
+  border-bottom: 3px solid #0d47a1;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.navbar-brand i {
+  color: #ffc107;
+}
+
+.nav-link {
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 0.375rem;
+  margin: 0 0.25rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+.nav-link i {
+  font-size: 0.9rem;
+}
+
+/* Cart summary in navbar */
+.navbar .cart-summary {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.dropdown-item i {
+  width: 1.25rem;
+  text-align: center;
+}
+
+.dropdown-divider {
+  margin: 0.5rem 0;
+}
+
+/* Mobile responsive */
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar .cart-summary {
+    margin: 1rem 0;
+  }
+}
+
+/* Animation for navbar toggle */
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
