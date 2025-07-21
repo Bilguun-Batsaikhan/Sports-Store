@@ -12,7 +12,8 @@ import { CheckoutComponent } from './store/checkout/checkout.component';
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { ProductCardComponent } from './store/product-card/product-card.component';
-import { OrdersComponent } from './store/orders/orders.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { StoreModule } from './store/store.module';
 
 // Register Italian locale for Euro formatting
 registerLocaleData(localeIt);
@@ -23,14 +24,7 @@ registerLocaleData(localeIt);
   // If you want to use these components in other modules, you need to export them
   // These are the "building blocks" that this module owns
   // Within the same module, all declared components can use each other's selectors in their templates.
-  declarations: [
-    AppComponent,
-    StoreComponent,
-    CheckoutComponent,
-    LoginComponent,
-    ProductCardComponent,
-    OrdersComponent,
-  ],
+  declarations: [AppComponent, LoginComponent],
   // Importing a module makes its exported declarations available in your module
   // BrowserModule is required for running in a browser (includes CommonModule)
   // HttpClientModule makes HttpClient service available
@@ -42,6 +36,7 @@ registerLocaleData(localeIt);
     HttpClientModule,
     FormsModule,
     SharedModule,
+    StoreModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it-IT' }],
   bootstrap: [AppComponent],
