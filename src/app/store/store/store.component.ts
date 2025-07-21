@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductRepositoryService } from '../../service/product-repository.service';
 import { Product } from '../../model/product';
 import { CartService } from '../../service/cart.service';
+import { ToastService } from '../../service/toast.service';
 //   Proprietà:
 // ● selectedCategory: string
 // ● productsPerPage: number = 4
@@ -20,7 +21,8 @@ import { CartService } from '../../service/cart.service';
 export class StoreComponent implements OnInit {
   constructor(
     private productRepository: ProductRepositoryService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {}
@@ -73,5 +75,19 @@ export class StoreComponent implements OnInit {
 
   addProductToCart(product: Product): void {
     this.cartService.addLine(product, 1);
+    this.toastService.success(`${product.name} added to cart!`, 3000);
   }
+  /*
+  // Success toast
+this.toastService.success('Order placed successfully!');
+
+// Error toast  
+this.toastService.error('Failed to save order');
+
+// Warning toast
+this.toastService.warning('Product stock is low');
+
+// Info toast
+this.toastService.info('Welcome to Sports Store!');
+  */
 }

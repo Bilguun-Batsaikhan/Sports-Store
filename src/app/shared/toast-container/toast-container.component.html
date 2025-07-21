@@ -1,0 +1,31 @@
+<div
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+  style="z-index: 1050"
+>
+  <div
+    *ngFor="let toast of toasts; trackBy: trackByToastId"
+    class="toast show"
+    [ngClass]="getToastClass(toast.type)"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <i
+        [class]="toast.icon + ' me-2 text-' + toast.type"
+        *ngIf="toast.icon"
+      ></i>
+      <strong class="me-auto">Sports Store</strong>
+      <small class="text-muted">Just now</small>
+      <button
+        type="button"
+        class="btn-close"
+        (click)="removeToast(toast.id)"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">
+      {{ toast.message }}
+    </div>
+  </div>
+</div>

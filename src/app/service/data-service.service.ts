@@ -11,22 +11,27 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class DataService {
-  baseUrl = 'http://localhost:8080/products';
+  baseUrlProducts = 'http://localhost:8080/products';
+  baseUrlOrders = 'http://localhost:8080/orders';
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}`);
+    return this.http.get<Product[]>(`${this.baseUrlProducts}`);
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/${id}`);
+    return this.http.get<Product>(`${this.baseUrlProducts}/${id}`);
   }
 
   getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/categories`);
+    return this.http.get<string[]>(`${this.baseUrlProducts}/categories`);
   }
 
   saveOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(`http://localhost:8080/orders`, order);
+    return this.http.post<Order>(`${this.baseUrlOrders}`, order);
+  }
+
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.baseUrlOrders}`);
   }
 }

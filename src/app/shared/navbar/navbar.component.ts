@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   currentUser: string = '';
   private authSubscription: Subscription = new Subscription();
+  private routerSubscription: Subscription = new Subscription();
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -37,8 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Navigation methods
   setActiveRoute(route: string): void {
     this.activeRoute = route;
-    console.log(`Navigating to: ${route}`);
-    // TODO: Implement actual routing logic
+    this.router.navigate([`/${route}`]);
   }
 
   // Authentication methods

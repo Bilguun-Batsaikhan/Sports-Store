@@ -9,5 +9,6 @@ export interface Order {
   zip: string;
   country: string;
   shipped?: boolean;
+  orderDate?: Date;
   lines: CartLine[];
 }

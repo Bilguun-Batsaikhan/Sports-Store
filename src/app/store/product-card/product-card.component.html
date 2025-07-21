@@ -1,0 +1,16 @@
+<div class="card h-100 shadow-sm">
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title text-primary">{{ product.name }}</h5>
+    <p class="card-text text-muted">{{ product.description }}</p>
+    <div class="mt-auto">
+      <p class="card-text">
+        <strong class="text-success fs-4">{{
+          product.price | currency : "EUR" : "symbol" : "1.2-2"
+        }}</strong>
+      </p>
+      <button class="btn btn-primary w-100" (click)="addProductToCart()">
+        <i class="fas fa-cart-plus me-2"></i>Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
