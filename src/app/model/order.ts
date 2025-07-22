@@ -11,4 +11,5 @@ export interface Order {
   shipped?: boolean;
   orderDate?: Date;
   lines: CartLine[];
+  invoiceId?: string | number; // Allow both string and number for flexibility
 }

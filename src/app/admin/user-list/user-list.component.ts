@@ -35,4 +35,8 @@ export class UserListComponent implements OnInit {
       user.role.toLowerCase().includes(this.filterByRole)
     );
   }
+
+  onUserAdded(user: User): void {
+    console.log('User added:', user);
+  }
 }

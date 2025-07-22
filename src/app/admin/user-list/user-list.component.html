@@ -8,7 +8,7 @@
       <div class="text-center w-50">
         <input
           type="text"
-          placeholder="Filtra per nome corso"
+          placeholder="Filter by role"
           (input)="updateFilter($event)"
           class="form-control w-50 mx-auto"
         />
@@ -21,7 +21,8 @@
         class="col-lg-3 col-md-4 col-sm-6 mb-4"
         *ngFor="let user of filteredUsers"
       >
-        <app-user-card [user]="user"> </app-user-card>
+        <app-user-card [user]="user" (userAdded)="onUserAdded($event)">
+        </app-user-card>
       </div>
     </div>
 
