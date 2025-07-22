@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { ProductCardComponent } from './store/product-card/product-card.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { StoreModule } from './store/store.module';
+import { AdminModule } from './admin/admin.module';
 
 // Register Italian locale for Euro formatting
 registerLocaleData(localeIt);
@@ -37,6 +38,7 @@ registerLocaleData(localeIt);
     FormsModule,
     SharedModule,
     StoreModule,
+    AdminModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it-IT' }],
   bootstrap: [AppComponent],

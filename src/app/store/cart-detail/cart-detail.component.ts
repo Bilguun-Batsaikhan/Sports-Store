@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CartService } from '../../service/cart.service';
 import { CartLine } from '../../model/cart-line';
 import { Product } from '../../model/product';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-cart-detail',
@@ -10,7 +11,11 @@ import { Product } from '../../model/product';
   styleUrls: ['./cart-detail.component.css'],
 })
 export class CartDetailComponent {
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   get lines(): CartLine[] {
     return this.cartService.lines;
@@ -45,10 +50,14 @@ export class CartDetailComponent {
         modal.hide();
       }
     }
-
-    // Navigate to checkout after a short delay to allow modal to close
-    setTimeout(() => {
-      this.router.navigate(['/checkout']);
-    }, 300);
+    if (this.authService.isLoggedIn) {
+      // Navigate to checkout after a short delay to allow modal to close
+      setTimeout(() => {
+        this.router.navigate(['/checkout']);
+      }, 300);
+    } else {
+      // If not logged in, redirect to login page
+      this.router.navigate(['/login']);
+    }
   }
 }

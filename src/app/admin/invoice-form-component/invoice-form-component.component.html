@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="p-4 shadow rounded bg-light">
+        <h2 class="text-center mb-4">Create Invoice</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="createdAt" class="form-label">Created At</label>
+            <input
+              type="date"
+              id="createdAt"
+              class="form-control"
+              [(ngModel)]="invoice.createdAt"
+              name="createdAt"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="expiryAt" class="form-label">Expiration Date</label>
+            <input
+              type="date"
+              id="expiryAt"
+              class="form-control"
+              [(ngModel)]="invoice.expiryAt"
+              name="expiryAt"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <!-- <label for="orders" class="form-label">Order IDs</label>
+            <input
+              type="text"
+              id="orders"
+              class="form-control"
+              [(ngModel)]="invoice.orders"
+              name="orders"
+              required
+            /> -->
+            <select name="orders" id="orders">
+              <option *ngFor="let order of availableOrders" [value]="order.id">
+                {{ order.name }} ({{ order.id }})
+              </option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="resetForm()"
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

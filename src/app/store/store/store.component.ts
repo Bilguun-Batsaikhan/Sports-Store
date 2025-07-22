@@ -27,7 +27,8 @@ export class StoreComponent implements OnInit {
 
   ngOnInit(): void {}
   selectedCategory: string = '';
-  productsPerPage: number = 4;
+  selectedInvoice: string = '';
+  productsPerPage: number = 8;
   selectedPage: number = 1;
 
   get cartItemCount(): number {
@@ -57,6 +58,10 @@ export class StoreComponent implements OnInit {
   changeCategory(category: string): void {
     this.selectedCategory = category;
     this.selectedPage = 1; // Reset to first page when changing category
+  }
+
+  changeInvoice(invoice: string): void {
+    this.selectedInvoice = invoice;
   }
 
   changePage(page: number): void {

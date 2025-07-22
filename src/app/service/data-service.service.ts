@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { Product } from '../model/product';
 import { Order } from '../model/order';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../model/user';
+import { Invoice } from '../model/invoice';
 // ● getProducts(): Observable<Product[]>
 // ● getProduct(id: number): Observable<Product>
 // ● getCategories(): Observable<string[]>
@@ -13,6 +15,9 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
   baseUrlProducts = 'http://localhost:8080/products';
   baseUrlOrders = 'http://localhost:8080/orders';
+  baseUrlUsers = 'http://localhost:8080/api/users';
+  baseUrlInvoices = 'http://localhost:8080/api/invoices';
+
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
@@ -33,5 +38,13 @@ export class DataService {
 
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.baseUrlOrders}`);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrlUsers);
+  }
+
+  getInvoices(): Observable<Invoice[]> {
+    return this.http.get<Invoice[]>(this.baseUrlInvoices);
   }
 }

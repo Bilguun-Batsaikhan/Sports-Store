@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Categories Sidebar -->
-    <div class="col-md-3 col-lg-2 bg-light p-3">
+    <div class="col-md-3 col-lg-2 bg-light p-3" *ngIf="selectedInvoice === ''">
       <h5 class="mb-3">Categories</h5>
       <div class="list-group">
         <button
@@ -23,8 +23,13 @@
       </div>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="col-md-9 col-lg-10">
+    <!-- Main Content Area Products -->
+    <div
+      class="col-md-6 col-lg-7"
+      *ngIf="selectedInvoice === ''"
+      [class.col-md-9]="selectedInvoice !== ''"
+      [class.col-lg-10]="selectedInvoice !== ''"
+    >
       <!-- Header with Cart -->
       <div
         class="d-flex justify-content-between align-items-center mb-4 p-3 bg-white shadow-sm rounded"
@@ -77,6 +82,64 @@
             </li>
           </ul>
         </nav>
+      </div>
+    </div>
+
+    <app-invoices-list-component
+      class="col-md-9 col-lg-10"
+      *ngIf="selectedInvoice === 'list-of-invoices'"
+    ></app-invoices-list-component>
+    <app-invoice-form-component
+      class="col-md-9 col-lg-10"
+      *ngIf="selectedInvoice === 'invoice-form'"
+    ></app-invoice-form-component>
+    <app-annual-report-component
+      class="col-md-9 col-lg-10"
+      *ngIf="selectedInvoice === 'annual-report'"
+    ></app-annual-report-component>
+    <!-- Right Sidebar for invoices -->
+    <div class="col-md-3 col-lg-2 bg-light p-3">
+      <h5 class="mb-3">Navigation</h5>
+
+      <!-- Back to Products Button -->
+      <div class="list-group mb-3" *ngIf="selectedInvoice !== ''">
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === ''"
+          (click)="changeInvoice('')"
+        >
+          <i class="fas fa-arrow-left me-2"></i>
+          Back to Products
+        </button>
+      </div>
+
+      <h6 class="mb-3">Invoices</h6>
+      <div class="list-group">
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === 'annual-report'"
+          (click)="changeInvoice('annual-report')"
+        >
+          Annual Report
+        </button>
+      </div>
+      <div class="list-group">
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === 'invoice-form'"
+          (click)="changeInvoice('invoice-form')"
+        >
+          Invoice Form
+        </button>
+      </div>
+      <div class="list-group">
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === 'list-of-invoices'"
+          (click)="changeInvoice('list-of-invoices')"
+        >
+          List of Invoices
+        </button>
       </div>
     </div>
   </div>
