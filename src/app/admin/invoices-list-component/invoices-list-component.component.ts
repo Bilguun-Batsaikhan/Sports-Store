@@ -31,7 +31,7 @@ export class InvoicesListComponentComponent implements OnInit {
   viewOrders(invoiceId: number): void {
     // Set the filter in the service (convert to string for consistency)
     this.invoiceFilterService.setSelectedInvoiceId(invoiceId.toString());
-    
+
     // Navigate to orders page
     this.router.navigate(['/admin/orders']);
   }

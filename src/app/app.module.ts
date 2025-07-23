@@ -7,14 +7,14 @@ import localeIt from '@angular/common/locales/it';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreComponent } from './store/store/store.component';
-import { CheckoutComponent } from './store/checkout/checkout.component';
+
 import { SharedModule } from './shared/shared.module';
 import { LoginComponent } from './login/login.component';
-import { ProductCardComponent } from './store/product-card/product-card.component';
-import { OrdersComponent } from './admin/orders/orders.component';
+
 import { StoreModule } from './store/store.module';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 // Register Italian locale for Euro formatting
 registerLocaleData(localeIt);
@@ -39,6 +39,8 @@ registerLocaleData(localeIt);
     SharedModule,
     StoreModule,
     AdminModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it-IT' }],
   bootstrap: [AppComponent],

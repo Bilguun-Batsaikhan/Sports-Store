@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { Subscription } from 'rxjs';
@@ -38,7 +38,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Navigation methods
   setActiveRoute(route: string): void {
     this.activeRoute = route;
-    this.router.navigate([`/${route}`]);
+    console.log(`Navigating to ${route}`);
+    this.router.navigate([`admin/${route}`]);
   }
 
   // Authentication methods

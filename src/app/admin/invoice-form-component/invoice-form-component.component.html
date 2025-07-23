@@ -4,51 +4,84 @@
       <div class="p-4 shadow rounded bg-light">
         <h2 class="text-center mb-4">Create Invoice</h2>
         <form (ngSubmit)="onSubmit()">
+          <!-- Created At Field - Material Datepicker -->
           <div class="mb-3">
-            <label for="createdAt" class="form-label">Created At</label>
-            <input
-              type="date"
-              id="createdAt"
-              class="form-control"
-              [(ngModel)]="invoice.createdAt"
-              name="createdAt"
-              required
-            />
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Created At</mat-label>
+              <input
+                matInput
+                [matDatepicker]="createdAtPicker"
+                [(ngModel)]="invoice.createdAt"
+                name="createdAt"
+                required
+                readonly
+              />
+              <mat-hint>Select the invoice creation date</mat-hint>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="createdAtPicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #createdAtPicker></mat-datepicker>
+            </mat-form-field>
           </div>
+
+          <!-- Expiry Date Field - Material Datepicker -->
           <div class="mb-3">
-            <label for="expiryAt" class="form-label">Expiration Date</label>
-            <input
-              type="date"
-              id="expiryAt"
-              class="form-control"
-              [(ngModel)]="invoice.expiryAt"
-              name="expiryAt"
-              required
-            />
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>Expiration Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="expiryAtPicker"
+                [(ngModel)]="invoice.expiryAt"
+                name="expiryAt"
+                required
+                readonly
+              />
+              <mat-hint>Select when this invoice expires</mat-hint>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="expiryAtPicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #expiryAtPicker></mat-datepicker>
+            </mat-form-field>
           </div>
+
+          <!-- Orders Selection - Bootstrap Alternative -->
           <div class="mb-3">
-            <!-- <label for="orders" class="form-label">Order IDs</label>
-            <input
-              type="text"
-              id="orders"
-              class="form-control"
-              [(ngModel)]="invoice.orders"
+            <label class="form-label">Select Orders</label>
+            <select
+              class="form-select"
+              [(ngModel)]="selectedOrderIds"
               name="orders"
+              multiple
               required
-            /> -->
-            <select name="orders" id="orders">
+              size="4"
+            >
               <option *ngFor="let order of availableOrders" [value]="order.id">
-                {{ order.name }} ({{ order.id }})
+                {{ order.name }} (#{{ order.id }})
               </option>
             </select>
+            <div class="form-text">
+              Hold Ctrl (Cmd on Mac) and click to select multiple orders
+            </div>
           </div>
           <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              class="me-2"
+            >
+              <i class="fas fa-save me-1"></i>
+              Submit
+            </button>
             <button
               type="button"
-              class="btn btn-secondary"
+              mat-raised-button
+              color="warn"
               (click)="resetForm()"
             >
+              <i class="fas fa-undo me-1"></i>
               Reset
             </button>
           </div>

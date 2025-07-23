@@ -1,0 +1,82 @@
+/* Fix Material Design visibility issues */
+mat-form-field {
+  display: block !important;
+  color: #333 !important;
+  background-color: white !important;
+}
+
+/* Datepicker specific fixes */
+.mat-mdc-form-field-fill {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.mat-mdc-form-field-fill .mat-mdc-form-field-flex {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+mat-select {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+.mat-mdc-form-field {
+  color: #333 !important;
+}
+
+.mat-mdc-select {
+  color: #333 !important;
+}
+
+.mat-mdc-select-trigger {
+  color: #333 !important;
+}
+
+/* Datepicker toggle button */
+.mat-datepicker-toggle {
+  color: #0d6efd !important;
+}
+
+.mat-mdc-icon-button {
+  color: #0d6efd !important;
+}
+
+/* Input text color */
+.mat-mdc-input-element {
+  color: #333 !important;
+}
+
+/* Label colors */
+.mat-mdc-form-field-label {
+  color: #666 !important;
+}
+
+.mat-mdc-form-field-label.mdc-floating-label--float-above {
+  color: #0d6efd !important;
+}
+
+/* Ensure proper spacing */
+.form-text {
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+/* Fix any potential z-index issues */
+.mat-mdc-select-panel,
+.mat-datepicker-popup {
+  z-index: 1000 !important;
+}
+
+/* Ensure the outline appears */
+.mat-mdc-form-field-outline {
+  color: #dee2e6 !important;
+}
+
+.mat-mdc-form-field-outline-thick {
+  color: #0d6efd !important;
+}
+
+/* Datepicker calendar */
+.mat-calendar {
+  background-color: white !important;
+  color: #333 !important;
+}

@@ -15,6 +15,7 @@
                 <th>Invoice ID</th>
                 <th>Created At</th>
                 <th>Expiration Date</th>
+                <th>Paid</th>
                 <th>Order IDs</th>
                 <th scope="col" class="text-center">Actions</th>
               </tr>
@@ -24,6 +25,16 @@
                 <td>{{ invoice.id }}</td>
                 <td>{{ invoice.createdAt | date : "short" }}</td>
                 <td>{{ invoice.expiryAt | date : "short" }}</td>
+                <div class="d-flex align-items-center justify-content-center">
+                  <td
+                    [ngClass]="{
+                      'badge text-bg-secondary': invoice.paid,
+                      'badge text-bg-danger': !invoice.paid
+                    }"
+                  >
+                    {{ invoice.paid ? "Yes" : "No" }}
+                  </td>
+                </div>
                 <td>
                   <ul class="list-unstyled mb-0">
                     <li *ngFor="let order of invoice.orders">
@@ -34,7 +45,7 @@
                 <td class="text-center">
                   <button
                     class="btn btn-outline-info btn-sm"
-                    (click)="viewOrders(invoice.id)"
+                    (click)="viewOrders(invoice.id!)"
                   >
                     <i class="fas fa-eye"></i>
                     View Orders

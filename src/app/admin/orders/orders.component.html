@@ -79,6 +79,7 @@
                           'btn-outline-warning': !order.shipped
                         }"
                         [disabled]="order.shipped"
+                        (click)="shipOrder(order.id!)"
                       >
                         <i class="fas fa-shipping-fast me-1"></i>
                         Ship

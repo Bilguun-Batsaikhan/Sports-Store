@@ -37,52 +37,74 @@
         <h2 class="mb-0">
           Sports Store <i class="fa-solid fa-futbol text-primary"></i>
         </h2>
-        <app-cart-summary></app-cart-summary>
-      </div>
-
-      <!-- Products Grid -->
-      <div class="row">
-        <div
-          class="col-lg-3 col-md-4 col-sm-6 mb-4"
-          *ngFor="let product of products"
-        >
-          <app-product-card
-            [product]="product"
-            (productAdded)="addProductToCart($event)"
+        <div class="d-flex align-items-center">
+          <button
+            mat-raised-button
+            color="primary"
+            class="me-4"
+            (click)="showProductForm()"
           >
-          </app-product-card>
+            Add new product
+          </button>
+          <app-cart-summary></app-cart-summary>
         </div>
       </div>
 
+      <!-- Products Grid -->
+      <ng-container *ngIf="!showPform">
+        <div class="row">
+          <div
+            class="col-lg-3 col-md-4 col-sm-6 mb-4"
+            *ngFor="let product of products"
+          >
+            <app-product-card
+              [product]="product"
+              (productAdded)="addProductToCart($event)"
+            >
+            </app-product-card>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="showPform">
+        <app-product-form (closeForm)="showPform = false"></app-product-form>
+      </ng-container>
       <!-- Pagination -->
-      <div class="d-flex justify-content-center mt-4" *ngIf="totalPages > 1">
-        <nav>
-          <ul class="pagination">
-            <li class="page-item" [class.disabled]="selectedPage === 1">
-              <button class="page-link" (click)="changePage(selectedPage - 1)">
-                Previous
-              </button>
-            </li>
-            <li
-              class="page-item"
-              *ngFor="let page of getPages()"
-              [class.active]="page === selectedPage"
-            >
-              <button class="page-link" (click)="changePage(page)">
-                {{ page }}
-              </button>
-            </li>
-            <li
-              class="page-item"
-              [class.disabled]="selectedPage === totalPages"
-            >
-              <button class="page-link" (click)="changePage(selectedPage + 1)">
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <ng-container *ngIf="!showPform">
+        <div class="d-flex justify-content-center mt-4" *ngIf="totalPages > 1">
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="selectedPage === 1">
+                <button
+                  class="page-link"
+                  (click)="changePage(selectedPage - 1)"
+                >
+                  Previous
+                </button>
+              </li>
+              <li
+                class="page-item"
+                *ngFor="let page of getPages()"
+                [class.active]="page === selectedPage"
+              >
+                <button class="page-link" (click)="changePage(page)">
+                  {{ page }}
+                </button>
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="selectedPage === totalPages"
+              >
+                <button
+                  class="page-link"
+                  (click)="changePage(selectedPage + 1)"
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </ng-container>
     </div>
 
     <app-invoices-list-component

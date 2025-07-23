@@ -9,6 +9,14 @@ import { AnnualReportComponentComponent } from './annual-report-component/annual
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +26,27 @@ import { FormsModule } from '@angular/forms';
     AnnualReportComponentComponent,
     UserListComponent,
     UserCardComponent,
+    ProductFormComponent,
+    UserFormComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, SharedModule, FormsModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    SharedModule,
+    FormsModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
   exports: [
     OrdersComponent,
     InvoicesListComponentComponent,
     InvoiceFormComponentComponent,
     AnnualReportComponentComponent,
+    ProductFormComponent,
   ],
 })
 export class AdminModule {}

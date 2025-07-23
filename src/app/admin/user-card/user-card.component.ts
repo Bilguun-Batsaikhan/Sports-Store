@@ -9,7 +9,7 @@ import { GoldUserService } from 'src/app/service/gold-user.service';
 })
 export class UserCardComponent implements OnInit {
   @Input() user!: User;
-  @Output() userAdded = new EventEmitter<User>();
+  @Output() userAddedtoGold = new EventEmitter<User>();
   constructor(private goldUserService: GoldUserService) {}
 
   ngOnInit(): void {}
@@ -20,6 +20,6 @@ export class UserCardComponent implements OnInit {
       goldMemberSince: new Date(),
     };
     this.goldUserService.addGoldUser(goldUser);
-    this.userAdded.emit(this.user);
+    this.userAddedtoGold.emit(this.user);
   }
 }

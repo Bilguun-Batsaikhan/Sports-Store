@@ -30,6 +30,7 @@ export class StoreComponent implements OnInit {
   selectedInvoice: string = '';
   productsPerPage: number = 8;
   selectedPage: number = 1;
+  showPform: boolean = false;
 
   get cartItemCount(): number {
     return this.cartService.itemCount;
@@ -81,6 +82,10 @@ export class StoreComponent implements OnInit {
   addProductToCart(product: Product): void {
     this.cartService.addLine(product, 1);
     this.toastService.success(`${product.name} added to cart!`, 3000);
+  }
+
+  showProductForm(): void {
+    this.showPform = true;
   }
   /*
   // Success toast

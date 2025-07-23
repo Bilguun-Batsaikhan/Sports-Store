@@ -1,0 +1,179 @@
+<div class="container mb-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fas fa-plus-circle me-2"></i>
+          Add New User
+        </h5>
+      </div>
+    </div>
+    <div class="card-body">
+      <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+        <!-- User Name -->
+        <div class="mb-3">
+          <label for="firstname" class="form-label">First Name *</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstname"
+            name="firstname"
+            [(ngModel)]="user.firstName"
+            required
+            #firstnameField="ngModel"
+            [class.is-invalid]="
+              firstnameField.invalid && firstnameField.touched
+            "
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="firstnameField.invalid && firstnameField.touched"
+          >
+            Product name is required
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Last Name *</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastname"
+            name="lastname"
+            [(ngModel)]="user.lastName"
+            required
+            #lastnameField="ngModel"
+            [class.is-invalid]="lastnameField.invalid && lastnameField.touched"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="lastnameField.invalid && lastnameField.touched"
+          >
+            Last name is required
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email *</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            [(ngModel)]="user.email"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            #emailField="ngModel"
+            [class.is-invalid]="emailField.invalid && emailField.touched"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="emailField.invalid && emailField.touched"
+          >
+            <span *ngIf="emailField.errors?.['required']"
+              >Email is required</span
+            >
+            <span *ngIf="emailField.errors?.['email']"
+              >Please enter a valid email format</span
+            >
+            <span *ngIf="emailField.errors?.['pattern']"
+              >Email format is invalid</span
+            >
+          </div>
+        </div>
+        <!-- Username -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Username *</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            [(ngModel)]="user.username"
+            required
+            minlength="6"
+            #usernameField="ngModel"
+            [class.is-invalid]="usernameField.invalid && usernameField.touched"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="usernameField.invalid && usernameField.touched"
+          >
+            <span *ngIf="usernameField.errors?.['required']"
+              >Username is required</span
+            >
+            <span *ngIf="usernameField.errors?.['minlength']"
+              >Minimum length is 6 characters</span
+            >
+          </div>
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password *</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            [(ngModel)]="user.password"
+            required
+            minlength="6"
+            pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$"
+            #passwordField="ngModel"
+            [class.is-invalid]="passwordField.invalid && passwordField.touched"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="passwordField.invalid && passwordField.touched"
+          >
+            <span *ngIf="passwordField.errors?.['required']"
+              >Password is required</span
+            >
+            <span *ngIf="passwordField.errors?.['minlength']"
+              >Password must be at least 6 characters long</span
+            >
+            <span *ngIf="passwordField.errors?.['pattern']"
+              >Password must contain at least one uppercase letter and one
+              number</span
+            >
+          </div>
+        </div>
+        <!-- Role -->
+        <div class="mb-3">
+          <label for="role" class="form-label">Role *</label>
+          <select
+            class="form-select"
+            id="role"
+            name="role"
+            [(ngModel)]="user.role"
+            required
+            #roleField="ngModel"
+            [class.is-invalid]="roleField.invalid && roleField.touched"
+          >
+            <option value="" disabled selected>Select role</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+          <div
+            class="invalid-feedback"
+            *ngIf="roleField.invalid && roleField.touched"
+          >
+            Role is required
+          </div>
+        </div>
+        <!-- Action Buttons -->
+        <div class="d-flex justify-content-end gap-2">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="userForm.invalid"
+          >
+            <i class="fas fa-save me-1"></i>
+            Save User
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

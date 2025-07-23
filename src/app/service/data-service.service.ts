@@ -5,6 +5,7 @@ import { Order } from '../model/order';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user';
 import { Invoice } from '../model/invoice';
+import { OrderPaymentInfo } from '../model/order-payment-info';
 // ● getProducts(): Observable<Product[]>
 // ● getProduct(id: number): Observable<Product>
 // ● getCategories(): Observable<string[]>
@@ -40,11 +41,23 @@ export class DataService {
     return this.http.get<Order[]>(`${this.baseUrlOrders}`);
   }
 
+  getOrdersPaidInfo(): Observable<OrderPaymentInfo[]> {
+    return this.http.get<OrderPaymentInfo[]>(`${this.baseUrlOrders}/partial`);
+  }
+
+  shipOrder(orderId: number): Observable<Order> {
+    return this.http.put<Order>(`${this.baseUrlOrders}/${orderId}/ship`, {});
+  }
+
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrlUsers);
   }
 
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.baseUrlInvoices);
+  }
+
+  saveInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.http.post<Invoice>(this.baseUrlInvoices, invoice);
   }
 }

@@ -7,10 +7,18 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { StoreComponent } from './store/store.component';
 import { AdminModule } from '../admin/admin.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [StoreComponent, CheckoutComponent, ProductCardComponent],
-  imports: [CommonModule, SharedModule, FormsModule, RouterModule, AdminModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule,
+    AdminModule,
+    MatButtonModule,
+  ],
   exports: [StoreComponent, CheckoutComponent, ProductCardComponent],
 })
 export class StoreModule {}

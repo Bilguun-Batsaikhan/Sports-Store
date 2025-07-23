@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Invoice } from 'src/app/model/invoice';
-import { Order } from 'src/app/model/order';
+import { OrderPaymentInfo } from 'src/app/model/order-payment-info';
 import { DataService } from 'src/app/service/data-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 
 @Component({
   selector: 'app-invoice-form-component',
@@ -9,38 +10,62 @@ import { DataService } from 'src/app/service/data-service.service';
   styleUrls: ['./invoice-form-component.component.css'],
 })
 export class InvoiceFormComponentComponent implements OnInit {
-  availableOrders: Order[] = [];
+  availableOrders: OrderPaymentInfo[] = [];
+  selectedOrderIds: number[] = []; // For the Material multi-select
+
   invoice: Invoice = {
-    id: 0,
     createdAt: new Date(),
     expiryAt: new Date(),
     orders: [],
+    paid: false, // Default to false
   };
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.loadAvailableOrders();
   }
 
   private loadAvailableOrders(): void {
-    this.dataService.getOrders().subscribe((orders) => {
-      this.availableOrders = orders;
+    this.dataService.getOrdersPaidInfo().subscribe((orders) => {
+      this.availableOrders = orders.filter((order) => !order.paid);
     });
   }
 
   onSubmit(): void {
-    // Logic to handle form submission
+    this.dataService.getOrders().subscribe((orders) => {
+      this.invoice.orders = orders.filter((order) =>
+        this.selectedOrderIds.includes(order.id!)
+      );
+    });
+
     console.log('Invoice submitted:', this.invoice);
-    // Here you would typically send the invoice to a service for processing
+    console.log('Selected orders:', this.invoice.orders);
+
+    this.dataService.saveInvoice(this.invoice).subscribe({
+      next: (response) => {
+        console.log('Invoice saved successfully:', response);
+        this.toastService.success('Invoice saved successfully!');
+        // Reset form after successful submission
+        this.resetForm();
+      },
+      error: (error) => {
+        console.error('Error saving invoice:', error);
+        this.toastService.error('Error saving invoice');
+      },
+    });
   }
 
   resetForm(): void {
     this.invoice = {
-      id: 0,
       createdAt: new Date(),
       expiryAt: new Date(),
       orders: [],
+      paid: false, // Default to false
     };
+    this.selectedOrderIds = [];
   }
 }
