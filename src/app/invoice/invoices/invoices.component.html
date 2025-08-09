@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Main Content Area for Invoices -->
+    <div class="col-md-9 col-lg-10">
+      <app-invoices-list-component
+        *ngIf="selectedInvoice === 'list-of-invoices'"
+      ></app-invoices-list-component>
+
+      <app-invoice-form-component
+        *ngIf="selectedInvoice === 'invoice-form'"
+      ></app-invoice-form-component>
+
+      <app-annual-report-component
+        *ngIf="selectedInvoice === 'annual-report'"
+      ></app-annual-report-component>
+    </div>
+
+    <!-- Right Sidebar for Invoice Navigation -->
+    <div class="col-md-3 col-lg-2 bg-light p-3">
+      <h5 class="mb-3">Invoice Navigation</h5>
+
+      <div class="list-group">
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === 'list-of-invoices'"
+          (click)="changeInvoice('list-of-invoices')"
+        >
+          <i class="fas fa-list me-2"></i>
+          List of Invoices
+        </button>
+
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === 'invoice-form'"
+          (click)="changeInvoice('invoice-form')"
+        >
+          <i class="fas fa-plus me-2"></i>
+          Create Invoice
+        </button>
+
+        <button
+          class="list-group-item list-group-item-action"
+          [class.active]="selectedInvoice === 'annual-report'"
+          (click)="changeInvoice('annual-report')"
+        >
+          <i class="fas fa-chart-bar me-2"></i>
+          Annual Report
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 
 import { StoreModule } from './store/store.module';
 import { AdminModule } from './admin/admin.module';
+import { InvoiceModule } from './invoice/invoice.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -39,6 +40,7 @@ registerLocaleData(localeIt);
     SharedModule,
     StoreModule,
     AdminModule,
+    InvoiceModule,
     BrowserAnimationsModule,
     MatButtonModule,
   ],

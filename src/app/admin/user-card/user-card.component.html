@@ -4,6 +4,9 @@
       {{ user.firstName }} {{ user.lastName }}
     </h5>
     <p class="card-text text-muted">{{ user.role }}</p>
+    <div class="user-img-container">
+      <div class="user-img"></div>
+    </div>
     <div class="mt-auto">
       <button class="btn btn-primary w-100" (click)="addToGoldUsers()">
         <i class="fas fa-cart-plus me-2"></i>Add to Gold Users

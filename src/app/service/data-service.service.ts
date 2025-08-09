@@ -41,6 +41,10 @@ export class DataService {
     return this.http.get<Order[]>(`${this.baseUrlOrders}`);
   }
 
+  getOrdersByUserId(userId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.baseUrlOrders}/users/${userId}`);
+  }
+
   getOrdersPaidInfo(): Observable<OrderPaymentInfo[]> {
     return this.http.get<OrderPaymentInfo[]>(`${this.baseUrlOrders}/partial`);
   }

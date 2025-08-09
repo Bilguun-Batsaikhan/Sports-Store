@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { Subscription } from 'rxjs';
+import { UserDto } from 'src/app/model/user-dto';
 
 @Component({
   selector: 'app-navbar',
@@ -11,13 +12,14 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
   // Navigation state
   activeRoute: string = 'products';
+  // Navbar items
 
   // Authentication state
   isLoggedIn: boolean = false;
-  currentUser: string = '';
-  private authSubscription: Subscription = new Subscription();
-  private routerSubscription: Subscription = new Subscription();
+  currentUser: UserDto | null = null;
 
+  navbarItems: { name: string; icon: string; route: string }[] = [];
+  private authSubscription: Subscription = new Subscription();
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -27,8 +29,32 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // Subscribe to authentication state changes
     this.authSubscription = this.authService.currentUser$.subscribe((user) => {
       this.isLoggedIn = !!user;
-      this.currentUser = user ? user.username || user.email || 'User' : '';
+      this.currentUser = user ? user : null;
+      this.updateNavbarItems(); // Update navbar items when user changes
     });
+  }
+
+  private updateNavbarItems(): void {
+    this.navbarItems = [
+      { name: 'Products', icon: 'fas fa-shopping-bag me-1', route: 'products' },
+      {
+        name: this.currentUser?.role === 'admin' ? 'Invoices' : 'Payment Due',
+        icon: 'fas fa-file-invoice me-1',
+        route: 'invoices',
+      },
+      {
+        name: this.currentUser?.role === 'admin' ? 'Orders' : 'My Orders',
+        icon: 'fas fa-receipt me-1',
+        route: 'orders',
+      },
+    ];
+    if (this.currentUser?.role === 'admin') {
+      this.navbarItems.push({
+        name: 'Users',
+        icon: 'fa-solid fa-users',
+        route: 'users',
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -38,8 +64,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Navigation methods
   setActiveRoute(route: string): void {
     this.activeRoute = route;
-    console.log(`Navigating to ${route}`);
-    this.router.navigate([`admin/${route}`]);
+    if (route === 'products') {
+      this.router.navigate(['products']);
+    } else if (route === 'invoices') {
+      this.router.navigate(['invoices']);
+    } else {
+      this.router.navigate([`admin/${route}`]);
+    }
   }
 
   // Authentication methods

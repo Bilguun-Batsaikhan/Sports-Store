@@ -3,6 +3,8 @@ import { ProductRepositoryService } from '../../service/product-repository.servi
 import { Product } from '../../model/product';
 import { CartService } from '../../service/cart.service';
 import { ToastService } from '../../service/toast.service';
+import { UserDto } from 'src/app/model/user-dto';
+import { AuthService } from 'src/app/service/auth.service';
 //   Proprietà:
 // ● selectedCategory: string
 // ● productsPerPage: number = 4
@@ -22,15 +24,20 @@ export class StoreComponent implements OnInit {
   constructor(
     private productRepository: ProductRepositoryService,
     private cartService: CartService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
   selectedCategory: string = '';
-  selectedInvoice: string = '';
   productsPerPage: number = 8;
   selectedPage: number = 1;
   showPform: boolean = false;
+  currentUser: UserDto | null = null;
 
   get cartItemCount(): number {
     return this.cartService.itemCount;
@@ -61,10 +68,6 @@ export class StoreComponent implements OnInit {
     this.selectedPage = 1; // Reset to first page when changing category
   }
 
-  changeInvoice(invoice: string): void {
-    this.selectedInvoice = invoice;
-  }
-
   changePage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.selectedPage = page;
@@ -86,6 +89,10 @@ export class StoreComponent implements OnInit {
 
   showProductForm(): void {
     this.showPform = true;
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
   /*
   // Success toast

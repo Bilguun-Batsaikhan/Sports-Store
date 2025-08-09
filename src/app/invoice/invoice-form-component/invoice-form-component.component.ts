@@ -40,22 +40,22 @@ export class InvoiceFormComponentComponent implements OnInit {
       this.invoice.orders = orders.filter((order) =>
         this.selectedOrderIds.includes(order.id!)
       );
-    });
 
-    console.log('Invoice submitted:', this.invoice);
-    console.log('Selected orders:', this.invoice.orders);
+      console.log('Invoice submitted:', this.invoice);
+      console.log('Selected orders:', this.invoice.orders);
 
-    this.dataService.saveInvoice(this.invoice).subscribe({
-      next: (response) => {
-        console.log('Invoice saved successfully:', response);
-        this.toastService.success('Invoice saved successfully!');
-        // Reset form after successful submission
-        this.resetForm();
-      },
-      error: (error) => {
-        console.error('Error saving invoice:', error);
-        this.toastService.error('Error saving invoice');
-      },
+      this.dataService.saveInvoice(this.invoice).subscribe({
+        next: (response) => {
+          console.log('Invoice saved successfully:', response);
+          this.toastService.success('Invoice saved successfully!');
+          // Reset form after successful submission
+          this.resetForm();
+        },
+        error: (error) => {
+          console.error('Error saving invoice:', error);
+          this.toastService.error('Error saving invoice');
+        },
+      });
     });
   }
 

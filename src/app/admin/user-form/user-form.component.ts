@@ -1,13 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/model/user';
-
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.css'],
 })
 export class UserFormComponent implements OnInit {
-  @Output() userAdded = new EventEmitter<User>();
+  // @Output() userAdded = new EventEmitter<User>();
   user: User = {
     firstName: '',
     lastName: '',
@@ -16,17 +16,22 @@ export class UserFormComponent implements OnInit {
     password: '',
     role: '',
   };
-  constructor() {}
+  constructor(private dialogRef: MatDialogRef<UserFormComponent>) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
     // Emit the user data when the form is submitted
-    this.userAdded.emit(this.user);
+    // this.userAdded.emit(this.user);
     // Reset the form or perform any additional actions as needed
     this.resetForm();
     console.log('User submitted:', this.user);
   }
+
+  close() {
+    this.dialogRef.close();
+  }
+
   resetForm() {
     this.user = {
       firstName: '',

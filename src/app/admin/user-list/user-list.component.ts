@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { DataService } from 'src/app/service/data-service.service';
 import { UserFormComponent } from '../user-form/user-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-list',
@@ -11,24 +12,26 @@ import { UserFormComponent } from '../user-form/user-form.component';
 export class UserListComponent implements OnInit {
   users: User[] = [];
   filterByRole: string = '';
-  showUserForm: boolean = false;
+
   // readonly dialog = inject(MatDialog);
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadUsers();
   }
 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(UserFormComponent);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(UserFormComponent, {
+      width: '500px',
+      data: {
+        /* optional data */
+      },
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     if (result !== undefined) {
-  //       this.animal.set(result);
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog was closed', result);
+    });
+  }
 
   loadUsers(): void {
     this.dataService.getUsers().subscribe((users: User[]) => {
@@ -53,7 +56,7 @@ export class UserListComponent implements OnInit {
   onUserAdded(user: User) {
     // handle user added
     this.users.push(user);
-    this.showUserForm = false; // Hide the form after adding a user
+
     console.log('User added:', user);
   }
 }

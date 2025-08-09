@@ -1,0 +1,200 @@
+/* Custom Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-dark: #b9375d; /* Deep Rose */
+  --primary-medium: #d25d5d; /* Medium Rose */
+  --primary-light: #e7d3d3; /* Light Rose */
+  --neutral-light: #eeeeee; /* Light Gray */
+
+  /* Additional shades for better design */
+  --primary-darker: #a12a4a; /* Darker version of primary-dark */
+  --primary-lighter: #f0e6e6; /* Lighter version of primary-light */
+  --text-dark: #2c2c2c; /* Dark text */
+  --text-light: #666666; /* Light text */
+  --white: #ffffff;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+}
+
+/* Override Bootstrap Primary Colors */
+.btn-primary {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  color: var(--white) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-darker) !important;
+  border-color: var(--primary-darker) !important;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(185, 55, 93, 0.25) !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active {
+  background-color: var(--primary-darker) !important;
+  border-color: var(--primary-darker) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-darker) !important;
+}
+
+/* Navbar Styling */
+.navbar.bg-primary {
+  background-color: var(--primary-dark) !important;
+}
+
+/* Override any blue borders from Material or other sources */
+.navbar,
+.navbar[class*="ngcontent"],
+nav.navbar,
+nav[class*="navbar"] {
+  border-bottom: 3px solid var(--primary-medium) !important;
+  border-color: var(--primary-medium) !important;
+}
+
+/* Force override for any blue color (#0d47a1) */
+*[style*="#0d47a1"],
+*[class*="border"] {
+  border-color: var(--primary-medium) !important;
+}
+
+.navbar-brand {
+  color: var(--white) !important;
+}
+
+.navbar-nav .nav-link {
+  color: var(--white) !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--primary-light) !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--primary-light) !important;
+  font-weight: 600;
+}
+
+/* Pagination Styling */
+.pagination .page-link {
+  color: var(--primary-dark) !important;
+  border-color: var(--primary-light) !important;
+}
+
+.pagination .page-link:hover {
+  color: var(--white) !important;
+  background-color: var(--primary-medium) !important;
+  border-color: var(--primary-medium) !important;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  color: var(--white) !important;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--text-light) !important;
+  background-color: var(--neutral-light) !important;
+  border-color: var(--primary-light) !important;
+}
+
+/* List Group Styling */
+.list-group-item-action.active {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  color: var(--white) !important;
+}
+
+.list-group-item-action:hover {
+  background-color: var(--primary-light) !important;
+  color: var(--primary-dark) !important;
+}
+
+/* Card and Background Styling */
+.bg-light {
+  background-color: var(--neutral-light) !important;
+}
+
+.bg-white {
+  background-color: var(--white) !important;
+}
+
+/* Text Colors */
+.text-primary {
+  color: var(--primary-dark) !important;
+}
+
+.text-muted {
+  color: var(--text-light) !important;
+}
+
+/* Form Controls */
+.form-control:focus {
+  border-color: var(--primary-medium) !important;
+  box-shadow: 0 0 0 0.2rem rgba(210, 93, 93, 0.25) !important;
+}
+
+/* Material Design Components */
+.mat-raised-button.mat-primary {
+  background-color: var(--primary-dark) !important;
+  color: var(--white) !important;
+}
+
+.mat-raised-button.mat-primary:hover {
+  background-color: var(--primary-darker) !important;
+}
+
+/* Custom component specific styles */
+.sports-store-header {
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark) 0%,
+    var(--primary-medium) 100%
+  );
+  color: var(--white);
+}
+
+.category-sidebar {
+  background-color: var(--primary-lighter) !important;
+  border-right: 2px solid var(--primary-light);
+}
+
+.product-card {
+  border: 1px solid var(--primary-light);
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  border-color: var(--primary-medium);
+  box-shadow: 0 4px 8px rgba(185, 55, 93, 0.15);
+}
+
+/* Advertisement section */
+.ad-section {
+  background-color: var(--primary-lighter) !important;
+  border: 2px dashed var(--primary-light);
+}
+
+/* Toast notifications */
+.toast.success {
+  background-color: var(--success) !important;
+}
+
+.toast.error {
+  background-color: var(--danger) !important;
+}
+
+.toast.warning {
+  background-color: var(--warning) !important;
+}
+
+.toast.info {
+  background-color: var(--primary-medium) !important;
+}

@@ -4,6 +4,10 @@ import { DataService } from 'src/app/service/data-service.service';
 import { InvoiceFilterService } from 'src/app/service/invoice-filter.service';
 import { Subscription } from 'rxjs';
 import { ToastService } from 'src/app/service/toast.service';
+import { MatDialog } from '@angular/material/dialog';
+import { OrderDialogComponent } from '../order-dialog/order-dialog.component';
+import { AuthService } from 'src/app/service/auth.service';
+import { UserDto } from 'src/app/model/user-dto';
 
 @Component({
   selector: 'app-orders',
@@ -18,15 +22,23 @@ export class OrdersComponent implements OnInit, OnDestroy {
   selectedPage: number = 1;
   selectedInvoiceId: string | null = null;
   private subscription = new Subscription();
+  currentUser: UserDto | null = null;
 
+  private authSubscription: Subscription = new Subscription();
   constructor(
     private dataService: DataService,
     private invoiceFilterService: InvoiceFilterService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.loadOrders();
+    this.authSubscription = this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user ? user : null;
+      console.log('Current user:', this.currentUser);
+      this.loadOrders();
+    });
 
     // Subscribe to invoice filter changes
     this.subscription.add(
@@ -39,21 +51,38 @@ export class OrdersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.authSubscription.unsubscribe();
   }
 
   private loadOrders(): void {
-    this.dataService.getOrders().subscribe({
-      next: (orders) => {
-        this.allOrders = orders;
-        this.applyFilter();
-      },
-      error: (err) => {
-        console.error('Error fetching orders:', err);
-        this.allOrders = [];
-        this.filteredOrders = [];
-      },
-      complete: () => console.log('Orders fetched successfully.'),
-    });
+    if (this.currentUser?.role === 'admin') {
+      this.dataService.getOrders().subscribe({
+        next: (orders) => {
+          this.allOrders = orders;
+          this.applyFilter();
+        },
+        error: (err) => {
+          console.error('Error fetching orders:', err);
+          this.allOrders = [];
+          this.filteredOrders = [];
+        },
+        complete: () => console.log('Orders fetched successfully.'),
+      });
+    } else {
+      console.log('The current user id is: ' + this.currentUser?.id);
+      this.dataService.getOrdersByUserId(this.currentUser?.id!).subscribe({
+        next: (orders) => {
+          this.allOrders = orders;
+          this.applyFilter();
+        },
+        error: (err) => {
+          console.error('Error fetching user orders:', err);
+          this.allOrders = [];
+          this.filteredOrders = [];
+        },
+        complete: () => console.log('User orders fetched successfully.'),
+      });
+    }
   }
 
   private applyFilter(): void {
@@ -122,6 +151,21 @@ export class OrdersComponent implements OnInit, OnDestroy {
         console.error('Error shipping order:', error);
         this.toastService.error('Error shipping order');
       },
+    });
+  }
+
+  openDialog(orderId: number): void {
+    const order = this.filteredOrders.find((o) => o.id === orderId);
+    const dialogRef = this.dialog.open(OrderDialogComponent, {
+      width: '400px',
+      data: { order: order },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Dialog result:', result);
+        // Handle the result from the dialog if needed
+      }
     });
   }
 }

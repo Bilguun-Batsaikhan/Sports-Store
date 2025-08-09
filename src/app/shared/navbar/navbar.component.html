@@ -22,34 +22,14 @@
     <!-- Navigation items -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
+        <li class="nav-item" *ngFor="let item of navbarItems">
           <a
             class="nav-link"
-            [class.active]="activeRoute === 'products'"
-            (click)="setActiveRoute('products')"
+            [class.active]="activeRoute === item.route"
+            (click)="setActiveRoute(item.route)"
           >
-            <i class="fas fa-shopping-bag me-1"></i>
-            Products
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="activeRoute === 'orders'"
-            (click)="setActiveRoute('orders')"
-          >
-            <i class="fas fa-receipt me-1"></i>
-            Orders
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            [class.active]="activeRoute === 'users'"
-            (click)="setActiveRoute('users')"
-          >
-            <i class="fas fa-users me-1"></i>
-            Users
+            <i [class]="item.icon"></i>
+            {{ item.name }}
           </a>
         </li>
       </ul>
@@ -73,7 +53,7 @@
             aria-expanded="false"
           >
             <i class="fas fa-user me-1"></i>
-            {{ currentUser }}
+            {{ currentUser?.username || currentUser?.email || "User" }}
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end"

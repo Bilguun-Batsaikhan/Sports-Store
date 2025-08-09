@@ -8,6 +8,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { StoreComponent } from './store/store.component';
 import { AdminModule } from '../admin/admin.module';
 import { MatButtonModule } from '@angular/material/button';
+import { InvoiceModule } from '../invoice/invoice.module';
 
 @NgModule({
   declarations: [StoreComponent, CheckoutComponent, ProductCardComponent],
@@ -18,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
     RouterModule,
     AdminModule,
     MatButtonModule,
+    InvoiceModule,
   ],
   exports: [StoreComponent, CheckoutComponent, ProductCardComponent],
 })

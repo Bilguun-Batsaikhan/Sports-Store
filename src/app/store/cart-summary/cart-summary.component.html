@@ -6,7 +6,7 @@
   style="cursor: pointer"
 >
   <div class="position-relative me-3">
-    <i class="fas fa-shopping-cart fa-2x text-primary"></i>
+    <i class="fas fa-shopping-cart fa-2x text-primary-light"></i>
     <span
       class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
       *ngIf="itemCount > 0"
@@ -15,8 +15,8 @@
     </span>
   </div>
   <div class="cart-total" *ngIf="itemCount > 0">
-    <div class="text-muted small">Total:</div>
-    <div class="text-success fw-bold">
+    <div class="small text-primary-light">Total:</div>
+    <div class="fw-bold text-primary-light">
       {{ cartPrice | currency : "EUR" : "symbol" : "1.2-2" }}
     </div>
   </div>

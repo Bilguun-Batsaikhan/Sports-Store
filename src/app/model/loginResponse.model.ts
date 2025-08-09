@@ -1,6 +1,6 @@
-import { User } from './user';
+import { UserDto } from './user-dto';
 
 export interface LoginResponse {
   token: string;
-  user: User;
+  user: UserDto;
 }

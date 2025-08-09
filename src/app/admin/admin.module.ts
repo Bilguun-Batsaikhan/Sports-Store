@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OrdersComponent } from './orders/orders.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { InvoicesListComponentComponent } from './invoices-list-component/invoices-list-component.component';
-import { InvoiceFormComponentComponent } from './invoice-form-component/invoice-form-component.component';
-import { AnnualReportComponentComponent } from './annual-report-component/annual-report-component.component';
+
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { FormsModule } from '@angular/forms';
@@ -17,17 +15,17 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { UserFormComponent } from './user-form/user-form.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { InvoiceModule } from '../invoice/invoice.module';
+import { OrderDialogComponent } from './order-dialog/order-dialog.component';
 @NgModule({
   declarations: [
     OrdersComponent,
-    InvoicesListComponentComponent,
-    InvoiceFormComponentComponent,
-    AnnualReportComponentComponent,
     UserListComponent,
     UserCardComponent,
     ProductFormComponent,
     UserFormComponent,
+    OrderDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -40,13 +38,9 @@ import { UserFormComponent } from './user-form/user-form.component';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
+    InvoiceModule,
   ],
-  exports: [
-    OrdersComponent,
-    InvoicesListComponentComponent,
-    InvoiceFormComponentComponent,
-    AnnualReportComponentComponent,
-    ProductFormComponent,
-  ],
+  exports: [OrdersComponent, ProductFormComponent],
 })
 export class AdminModule {}
