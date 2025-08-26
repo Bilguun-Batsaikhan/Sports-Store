@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { User } from '../model/user';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { LoginRequest } from '../model/loginRequest.model';
 import { LoginResponse } from '../model/loginResponse.model';
 import { Router } from '@angular/router';
@@ -13,7 +10,7 @@ import { CartService } from './cart.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/auth';
+  // Using local mock auth; no HTTP calls
 
   //Oggetto che mantiene sempre l'ultimo valore emesse e lo fornisce a chi si iscrive
   //Mantiene lo stato corrente dell'utente loggato
@@ -26,7 +23,6 @@ export class AuthService {
   //Serve ad esporre lo stato dell'utente loggato all'esterno della classe in modo sicuro.
 
   constructor(
-    private http: HttpClient,
     private router: Router,
     private cartService: CartService
   ) {
@@ -41,7 +37,20 @@ export class AuthService {
   }
 
   login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, request);
+    const { username, password } = request;
+    if (username === 'admin' && password === 'admin') {
+      const user: UserDto = {
+        id: 1,
+        username: 'admin',
+        email: 'admin@example.com',
+        role: 'admin',
+      };
+      const token = 'mock-token-admin';
+      // store immediately to keep behavior similar
+      this.setUser(user, token);
+      return of({ token, user });
+    }
+    return throwError(() => ({ error: { message: 'Invalid credentials' } }));
   }
 
   setUser(user: UserDto, token: string): void {
