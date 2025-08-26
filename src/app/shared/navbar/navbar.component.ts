@@ -37,23 +37,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private updateNavbarItems(): void {
     this.navbarItems = [
       { name: 'Products', icon: 'fas fa-shopping-bag me-1', route: 'products' },
-      {
-        name: this.currentUser?.role === 'admin' ? 'Invoices' : 'Payment Due',
-        icon: 'fas fa-file-invoice me-1',
-        route: 'invoices',
-      },
-      {
-        name: this.currentUser?.role === 'admin' ? 'Orders' : 'My Orders',
-        icon: 'fas fa-receipt me-1',
-        route: 'orders',
-      },
     ];
-    if (this.currentUser?.role === 'admin') {
-      this.navbarItems.push({
-        name: 'Users',
-        icon: 'fa-solid fa-users',
-        route: 'users',
-      });
+    if (this.isLoggedIn) {
+      this.navbarItems.push(
+        {
+          name: this.currentUser?.role === 'admin' ? 'Invoices' : 'Payment Due',
+          icon: 'fas fa-file-invoice me-1',
+          route: 'invoices',
+        },
+        {
+          name: this.currentUser?.role === 'admin' ? 'Orders' : 'My Orders',
+          icon: 'fas fa-receipt me-1',
+          route: 'orders',
+        }
+      );
+      if (this.currentUser?.role === 'admin') {
+        this.navbarItems.push({
+          name: 'Users',
+          icon: 'fa-solid fa-users',
+          route: 'users',
+        });
+      }
     }
   }
 

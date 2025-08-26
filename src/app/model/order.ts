@@ -12,4 +12,5 @@ export interface Order {
   orderDate?: Date;
   lines: CartLine[];
   invoiceId?: string | number; // Allow both string and number for flexibility
+  userId: number;
 }

@@ -75,6 +75,7 @@
                         View
                       </button>
                       <button
+                        *ngIf="currentUser?.role === 'admin'"
                         class="btn btn-sm"
                         [ngClass]="{
                           'btn-outline-secondary disabled': order.shipped,

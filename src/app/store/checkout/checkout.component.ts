@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../../model/order';
 import { CartService } from '../../service/cart.service';
 import { ProductRepositoryService } from '../../service/product-repository.service';
+import { AuthService } from 'src/app/service/auth.service';
 // ● order: Order
 // ● orderSent: boolean
 // ● submitted: boolean
@@ -24,6 +25,7 @@ export class CheckoutComponent implements OnInit {
     country: '',
     shipped: false,
     lines: [],
+    userId: 0,
   };
   orderSent: boolean = false;
   submitted: boolean = false;
@@ -45,6 +47,17 @@ export class CheckoutComponent implements OnInit {
       this.order.country &&
       this.order.lines.length > 0
     ) {
+      const user = localStorage.getItem('user');
+      const stored = localStorage.getItem('user');
+      if (stored) {
+        try {
+          const userObj = JSON.parse(stored);
+          this.order.userId = userObj.id;
+        } catch (e) {
+          console.error('Invalid user JSON', e);
+        }
+      }
+
       console.log('Order submitted:', this.order);
 
       // Simulate processing time and potential failure
@@ -83,6 +96,7 @@ export class CheckoutComponent implements OnInit {
       country: '',
       shipped: false,
       lines: [],
+      userId: 0,
     };
     this.orderSent = false;
     this.submitted = false;
